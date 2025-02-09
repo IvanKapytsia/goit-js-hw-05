@@ -1,35 +1,66 @@
-function calcAverageCalories(days) {
-  let total = 0;
-  for (const item of days) {
-    total += item.calories;
-  }
-  // console.log(total);
-  return total / days.length || 0;
-}
+const getUsersWithFriend = (users, friendName) =>
+  users.filter((user) => user.friends.some((friend) => friend === friendName));
 
-//!==========================================
-console.log(
-  calcAverageCalories([
-    { day: "monday", calories: 3010 },
-    { day: "tuesday", calories: 3200 },
-    { day: "wednesday", calories: 3120 },
-    { day: "thursday", calories: 2900 },
-    { day: "friday", calories: 3450 },
-    { day: "saturday", calories: 3280 },
-    { day: "sunday", calories: 3300 },
-  ])
-); // 3180
+// Функція має повертати масив усіх користувачів із масиву users, у яких є друг з іменем friendName.
+// Друзі кожного користувача зберігаються у властивості friends. Якщо користувачів, у яких є такий друг немає, то функція має повернути порожній масив.
 
-console.log(
-  calcAverageCalories([
-    { day: "monday", calories: 2040 },
-    { day: "tuesday", calories: 2270 },
-    { day: "wednesday", calories: 2420 },
-    { day: "thursday", calories: 1900 },
-    { day: "friday", calories: 2370 },
-    { day: "saturday", calories: 2280 },
-    { day: "sunday", calories: 2610 },
-  ])
-); // 2270
+// Поради:
+// Метод filter() можна використовувати для створення нового масиву з елементами, які задовольняють певну умову.
+// Використовуй метод includes() для перевірки, чи масив friends містить friendName.
+// !=================================================
+const allUsers = [
+  {
+    name: "Moore Hensley",
+    friends: ["Sharron Pace"],
+  },
+  {
+    name: "Sharlene Bush",
+    friends: ["Briana Decker", "Sharron Pace"],
+  },
+  {
+    name: "Ross Vazquez",
+    friends: ["Marilyn Mcintosh", "Padilla Garrison", "Naomi Buckner"],
+  },
+  {
+    name: "Elma Head",
+    friends: ["Goldie Gentry", "Aisha Tran"],
+  },
+  {
+    name: "Carey Barr",
+    friends: ["Jordan Sampson", "Eddie Strong"],
+  },
+  {
+    name: "Blackburn Dotson",
+    friends: ["Jacklyn Lucas", "Linda Chapman"],
+  },
+  {
+    name: "Sheree Anthony",
+    friends: ["Goldie Gentry", "Briana Decker"],
+  },
+];
 
-console.log(calcAverageCalories([])); // 0
+console.log(getUsersWithFriend(allUsers, "Briana Decker"));
+// [
+//   {
+//     name: "Sharlene Bush",
+//     friends: ["Briana Decker", "Sharron Pace"]
+//   },
+//   {
+//     name: "Sheree Anthony",
+//     friends: ["Goldie Gentry", "Briana Decker"]
+//   }
+// ]
+
+console.log(getUsersWithFriend(allUsers, "Goldie Gentry"));
+// [
+//   {
+//     name: "Elma Head",
+//     friends: ["Goldie Gentry", "Aisha Tran"]
+//   },
+//   {
+//     name: "Sheree Anthony",
+//     friends: ["Goldie Gentry", "Briana Decker"]
+//   }
+// ]
+
+console.log(getUsersWithFriend(allUsers, "Adrian Cross")); // []
